@@ -1,15 +1,19 @@
-type RerenderFunction = (container: HTMLElement) => void;
-type RerenderObj = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: number };
+type RerenderFunction = (container: HTMLElement, currentElmIndex?: any[]) => void;
+type TimeoutObject = { defaultTimeout: number, timeoutRate: number }
+type RerenderProps = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: TimeoutObject, prevent: boolean };
 
 import Timeout from "../ts/utils"
 
-export default async function quickSort(array: number[], from: number, to: number, rerender?: RerenderObj): Promise<void>
+export default async function quickSort(array: number[], from: number, to: number, rerender?: RerenderProps): Promise<void>
 {
     if (from < to) { 
         let t = partition(array, from, to);
 
         rerender.rerenderFnc(rerender.container);
-        await Timeout(rerender.timeout);
+        if (rerender.prevent) {
+            return;
+        }
+        await Timeout(rerender.timeout.defaultTimeout / rerender.timeout.timeoutRate);
 
         await quickSort(array, from, t - 1, rerender);
         await quickSort(array, t + 1, to, rerender);

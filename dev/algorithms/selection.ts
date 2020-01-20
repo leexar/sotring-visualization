@@ -1,9 +1,10 @@
 type RerenderFunction = (container: HTMLElement, currentElmIndex?: any[]) => void;
-type RerenderObj = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: number };
+type TimeoutObject = { defaultTimeout: number, timeoutRate: number }
+type RerenderProps = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: TimeoutObject, prevent: boolean };
 
 import Timeout from "../ts/utils"
 
-export default async function selectionSort(array: number[], rerender?: RerenderObj): Promise<void>{
+export default async function selectionSort(array: number[], rerender?: RerenderProps): Promise<void>{
     for(let i = 0; i < array.length; i++)
     {
         let min = array[i];
@@ -16,7 +17,10 @@ export default async function selectionSort(array: number[], rerender?: Rerender
                 minIndx = j;
 
                 rerender.rerenderFnc(rerender.container, [j]);
-                await Timeout(rerender.timeout);
+                if (rerender.prevent) {
+                    return;
+                }
+                await Timeout(rerender.timeout.defaultTimeout / rerender.timeout.timeoutRate);
             }
         }
         [array[i], array[minIndx]] = [array[minIndx], array[i]];

@@ -39,8 +39,12 @@ header button[disabled]{
 }
 
 .header__generate, .header__algorithms, .header__speed{
-    padding: 5px;
-    margin-right: 5px;
+    padding: 5px 0 0 5px;
+    display: flex;
+    align-items: center;
+}
+.header__start{
+    padding: 5px 0 0 0;
     display: flex;
     align-items: center;
 }
@@ -85,6 +89,6 @@ header button[disabled]{
     }
 }
 
-.header__start{
-    padding: 5px;
+.header__stop{
+    padding: 5px 0 0 5px;
 }

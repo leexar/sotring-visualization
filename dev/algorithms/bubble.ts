@@ -1,9 +1,10 @@
 type RerenderFunction = (container: HTMLElement, currentElmIndex?: any[]) => void;
-type RerenderObj = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: number };
+type TimeoutObject = { defaultTimeout: number, timeoutRate: number }
+type RerenderProps = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout : TimeoutObject, prevent: boolean };
 
 import Timeout from "../ts/utils"
 
-export default async function bubbleSort(array: number[], rerender?: RerenderObj) : Promise<void>
+export default async function bubbleSort(array: number[], rerender?: RerenderProps) : Promise<void>
 {
     for(let i = 0; i < array.length; i++)
     {
@@ -15,7 +16,11 @@ export default async function bubbleSort(array: number[], rerender?: RerenderObj
             }
 
             rerender.rerenderFnc(rerender.container, [j + 1]);
-            await Timeout(rerender.timeout);
+            if (rerender.prevent)
+            {
+                return;
+            }
+            await Timeout(rerender.timeout.defaultTimeout / rerender.timeout.timeoutRate);
         }
     }
 }

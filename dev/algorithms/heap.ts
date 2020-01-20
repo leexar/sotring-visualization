@@ -1,16 +1,20 @@
 type RerenderFunction = (container: HTMLElement, currentElmIndex?: any[]) => void;
-type RerenderObj = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: number };
+type TimeoutObject = { defaultTimeout: number, timeoutRate: number }
+type RerenderProps = { rerenderFnc: RerenderFunction, container: HTMLElement, timeout: TimeoutObject, prevent: boolean };
 
 import Timeout from "../ts/utils"
 
-export default async function heapSort(array: number[], rerender ?: RerenderObj) : Promise<void>
+export default async function heapSort(array: number[], rerender?: RerenderProps) : Promise<void>
 {
     var i = Math.floor((array.length / 2) - 1);
     while (i >= 0) {
         heapify(array, array.length, i);
         i--;
         rerender.rerenderFnc(rerender.container);
-        await Timeout(rerender.timeout);
+        if (rerender.prevent) {
+            return;
+        }
+        await Timeout(rerender.timeout.defaultTimeout / rerender.timeout.timeoutRate);
     }
 
     for(let i = array.length - 1; i >= 0; i--)
@@ -19,7 +23,10 @@ export default async function heapSort(array: number[], rerender ?: RerenderObj)
 
         heapify(array, i, 0);
         rerender.rerenderFnc(rerender.container);
-        await Timeout(rerender.timeout);
+        if (rerender.prevent) {
+            return;
+        }
+        await Timeout(rerender.timeout.defaultTimeout / rerender.timeout.timeoutRate);
     }
 }
 

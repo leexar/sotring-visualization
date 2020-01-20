@@ -2,19 +2,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 650px;
+    height: 520px;
     padding: 20px;
 
     & div{
-        margin-right: 5px;
-        width: 8px;
         background-color: $main-color;
     }
+
     & div[current]{
         background-color: $second-color;
     }
 
     &[done] div{
         background-color: greenyellow;
+    }
+}
+.container[large]{
+    & div{
+        margin-right: 10px;
+        width: 15px;
+    }
+}
+.container[medium]{
+    & div{
+        margin-right: 5px;
+        width: 8px;
+    }
+}
+.container[small]{
+    & div{
+        margin-right: 4px;
+        width: 4px;
+    }
+}
+.container[exsmall]{
+    & div{
+        margin-right: 0;
+        width: 2px;
     }
 }
