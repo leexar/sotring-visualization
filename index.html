@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/dist/style.css">
+
+    <title>Sorting</title>
+<link href="main.css" rel="stylesheet"></head>
+<body>
+    <header>   
+        <div class="header__generate">
+            <div style="margin-right: 10px;">
+                <div class="header__generate_input">
+                    <label for="input-size">Size:</label>
+                    <input type="number" id="input-size">
+                </div>
+                <div class="header__generate_btn">
+                    <button id="btn-generate">
+                        Generate array
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="header__speed">
+            <div style="display: inline-block; margin-right: 10px;">
+                <div>
+                    Algorithm speed
+                </div>
+                <div>
+                    <input type="range" id="range-speed" min="1" max="5" value="2">
+                </div>
+            </div>
+        </div>
+        <div class="header__algorithms">
+            <div>
+                <a href="#" active data-alg="bubble">Bubble sort</a>
+                <a href="#" data-alg="quick">Quick sort</a>
+                <a href="#" data-alg="selection">Selection sort</a>
+                <a href="#" data-alg="insertion">Insertion sort</a>
+                <!--<a href="#" data-alg="merge">Merge sort</a>-->
+                <a href="#" data-alg="heap">Heap sort</a>
+            </div>
+        </div>
+        <div class="header__start">
+            <button id="btn-start">
+                Sort!
+            </button>
+        </div>
+    </header>
+
+    <section class="wrapper">
+        <div class="container">
+
+        </div>
+    </section>
+
+    <script src="/dist/bundle.js"></script>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>

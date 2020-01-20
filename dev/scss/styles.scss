@@ -1,0 +1,21 @@
+$main-color: #9900ff;
+$light-main: lighten($main-color, 10%);
+$second-color: #fff09b;
+$text-color: #fff;
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/*
+html, body, .wrapper{
+    height: 100%;
+}
+*/
+body{
+    margin: 0;
+}
+
+@import "./components/header.scss";
+@import "./components/container.scss";
